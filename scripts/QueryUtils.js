@@ -19,6 +19,7 @@ const request = (...args) => {
         error.message = data.message;
         return Promise.reject(error);
       }
+      console.log(data);
       return data;
     });
 };
