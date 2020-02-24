@@ -28,5 +28,6 @@ export default {
   filterRating,
   error,
   currentlyAdding,
-  toggleShowDetails
+  toggleShowDetails,
+  bookmarks
 };

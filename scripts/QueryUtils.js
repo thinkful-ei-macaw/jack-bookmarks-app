@@ -1,9 +1,9 @@
 const BASE_URL =
-  'https://thinkful-list-api.herokuapp.com/jacklansing/bookmarks';
+  'https://thinkful-list-api.herokuapp.com/jacklansing/bookmarks/';
 
 const request = (...args) => {
   let error;
-  fetch(...args)
+  return fetch(...args)
     .then(res => {
       if (!res.ok) {
         error = { code: res.status };
@@ -19,39 +19,33 @@ const request = (...args) => {
         error.message = data.message;
         return Promise.reject(error);
       }
-      console.log(data);
       return data;
     });
 };
 
 const getBookmarks = () => {
-  console.log(BASE_URL);
   return request(BASE_URL);
 };
 
-/* For testing purposes only */
-const testMark = {
-  title: 'Google',
-  url: 'https://www.google.com',
-  desc: 'The best search enginge on the net',
-  rating: 5
+const serializeJson = formData => {
+  const formObj = {};
+  formData.forEach((val, name) => (formObj[name] = val));
+  return JSON.stringify(formObj);
 };
-/* For testing purposes only */
 
-const newBookmark = bookmark => {
+const newBookmark = bookmarkFormData => {
   return request(BASE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(testMark) //Delete me
+    method: 'post',
+    headers: { 'Content-Type': ' application/json' },
+    body: serializeJson(bookmarkFormData)
   });
 };
 
 const updateBookmark = (id, updates) => {
   //Optional: implement updating data
-  console.log('URL IS: ' + BASE_URL + ' ' + id);
   return request(`${BASE_URL}/${id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application-json' },
+    method: 'patch',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updates)
   });
 };
