@@ -1,4 +1,6 @@
 'use strict';
+import Store from './Store.js';
+import QueryUtils from './QueryUtils.js';
 
 const clickNewBookmark = () => {
   //Click handler for new bm
@@ -27,4 +29,10 @@ const clickCancelBookmark = () => {
 const clickCreateBookmark = () => {
   //Click handler for confirm create new bookmark
   //Must check all required details are provided
+};
+
+export default {
+  clickNewBookmark,
+  clickFilterBookmark,
+  clickExpandBookmark
 };

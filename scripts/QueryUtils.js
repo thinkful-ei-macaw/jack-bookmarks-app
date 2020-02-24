@@ -42,7 +42,7 @@ const newBookmark = bookmark => {
   return request(BASE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(testMark)
+    body: JSON.stringify(testMark) //Delete me
   });
 };
 
