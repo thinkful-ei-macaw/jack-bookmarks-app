@@ -26,7 +26,7 @@ const request = (...args) => {
 
 const getBookmarks = () => {
   console.log(BASE_URL);
-  return request(`${BASE_URL}`);
+  return request(BASE_URL);
 };
 
 /* For testing purposes only */
@@ -46,7 +46,23 @@ const newBookmark = bookmark => {
   });
 };
 
+const updateBookmark = (id, updates) => {
+  //Optional: implement updating data
+  console.log('URL IS: ' + BASE_URL + ' ' + id);
+  return request(`${BASE_URL}/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application-json' },
+    body: JSON.stringify(updates)
+  });
+};
+
+const deleteBookmark = id => {
+  return request(`${BASE_URL}/${id}`, { method: 'DELETE' });
+};
+
 export default {
   getBookmarks,
-  newBookmark
+  newBookmark,
+  deleteBookmark,
+  updateBookmark
 };

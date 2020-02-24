@@ -9,6 +9,7 @@ const setupEventListeners = () => {
 
 const main = () => {
   //QueryUtils.newBookmark();
+  // QueryUtils.updateBookmark('ck70vd5hd00100kshfd2yasow');
   QueryUtils.getBookmarks();
   setupEventListeners();
 };
