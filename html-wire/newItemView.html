@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Initial View</title>
+  </head>
+  <body>
+    <main id="root">
+      <h1>My Bookmarks</h1>
+      <button class="back-button js-back-button">Back</button>
+      <form class="new-item-form js-new-item-form">
+        <label for="new-item-name">Name:</label>
+        <input type="text" id="new-item-name" />
+        <br />
+        <label for="new-item-url">URL:</label>
+        <input type="url" id="new-item-url" />
+        <br />
+        <label for="new-item-rating">Rating:</label>
+        <select id="new-item-rating">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <br />
+        <button type="submit">Create!</button>
+      </form>
+    </main>
+    <footer>
+      <p>Credits to: Lorem, ipsum dolor sit amet</p>
+    </footer>
+    <script
+      src="http://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

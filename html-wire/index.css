@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: inherit;
+}
+
+h1 {
+  grid-area: header;
+  justify-self: center;
+}
+
+ul {
+  padding: 0;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px 8px;
+  grid-template-areas:
+    'header header header'
+    'new filter filter'
+    'bmark bmark bmark';
+}
+
+.new-item-form {
+  /* New item form will take up all explicit space except header */
+  grid-column: 1 / 4;
+  grid-row: 3 / 5;
+}
+
+.new-button {
+  grid-area: new;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.filter-menu {
+  grid-area: filter;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.bookmark-list {
+  grid-area: bmark;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-rows: minmax(50px, auto);
+  gap: 8px 0;
+  list-style-type: none;
+}
+
+.bookmark-item {
+  justify-self: center;
+}
+
+.expanded-content {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.bm-expand {
+  width: 80%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
