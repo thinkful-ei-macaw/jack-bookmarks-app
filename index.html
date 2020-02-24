@@ -15,38 +15,12 @@
     <title>Initial View</title>
   </head>
   <body>
-    <main id="root">
-      <h1>My Bookmarks</h1>
-      <button class="new-button js-new-button">New</button>
-      <form class="filter-menu js-filter-menu">
-        <label for="filter-rating">Minimum rating</label>
-        <select id="filter-rating">
-          <option>None</option>
-          <option>1 star</option>
-          <option>2 star</option>
-          <option>3 star</option>
-          <option>4 star</option>
-          <option>5 star</option>
-        </select>
-      </form>
-      <ul class="bookmark-list js-bookmark-list">
-        <li class="bookmark-item js-bookmark-item">
-          <button
-            class="bm-expand js-bm-expand"
-            role="button"
-            aria-expanded="false"
-          >
-            <span class="bm-title js-bm-title">Title</span
-            ><span class="bm-rating js-bm-rating">*****</span>
-          </button>
-        </li>
-      </ul>
-    </main>
+    <main id="root"></main>
     <script
       src="http://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="scripts/Bookmarks.js"></script>
   </body>
 </html>
