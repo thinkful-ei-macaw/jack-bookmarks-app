@@ -49,12 +49,16 @@ const updateBookmark = function(id, data) {
   Object.assign(currentBookmark, data);
 };
 
+const setError = function(error) {
+  this.error = error;
+};
+
 export default {
   addBookmark,
   deleteBookmark,
   setFilterRating,
   getFilterRating,
-  error,
+  setError,
   currentlyAdding,
   toggleShowDetails,
   resetShowDetails,

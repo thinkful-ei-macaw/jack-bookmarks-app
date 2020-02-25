@@ -56,7 +56,8 @@ const clickDeleteBookmark = () => {
     const id = getBookmarkIdFromElement(event.currentTarget);
     QueryUtils.deleteBookmark(id)
       .then(() => Store.deleteBookmark(id))
-      .then(() => renderHome());
+      .then(() => renderHome())
+      .catch(error => renderError(error));
   });
 };
 
@@ -85,7 +86,8 @@ const clickCreateBookmark = () => {
     QueryUtils.newBookmark(newBookmark)
       .then(newBookmark => Store.addBookmark(newBookmark))
       .then(() => Store.resetShowDetails())
-      .then(() => renderHome());
+      .then(() => renderHome())
+      .catch(error => renderError(error));
   });
 };
 
@@ -107,7 +109,8 @@ const clickUpdateBookmark = id => {
     const newBookmark = createBookmarkObject(formData);
     QueryUtils.updateBookmark(id, newBookmark)
       .then(() => Store.updateBookmark(id, newBookmark))
-      .then(() => renderHome());
+      .then(() => renderHome())
+      .catch(error => renderError(error));
   });
 };
 
@@ -233,6 +236,14 @@ const generateEditViewHtml = bookmark => {
   `;
 };
 
+const generateErrorHtml = error => {
+  return `
+  <div role="alert" class="error-alert">
+    <p>Oops! An error occured: ${error.message}</p>
+  </div>
+  `;
+};
+
 const render = (target, component) => {
   //Simple flexible render
   $(target).html(component);
@@ -246,6 +257,10 @@ const renderEditView = bookmark => {
   render('#root', generateEditViewHtml(bookmark));
 };
 
+const renderError = error => {
+  $('#root').prepend(generateErrorHtml(error));
+};
+
 const setupEventListners = () => {
   clickNewBookmark();
   clickFilterBookmark();
@@ -255,7 +270,8 @@ const setupEventListners = () => {
 const main = () => {
   Store.populateStore()
     .then(() => renderHome())
-    .then(() => setupEventListners());
+    .then(() => setupEventListners())
+    .catch(error => renderError(error));
   Store.setFilterRating(1);
 };
 

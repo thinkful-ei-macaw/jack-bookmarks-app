@@ -5,6 +5,7 @@ const request = (...args) => {
   let error;
   return fetch(...args)
     .then(res => {
+      console.log('res status is: ' + res.status);
       if (!res.ok) {
         error = { code: res.status };
       }
