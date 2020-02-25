@@ -119,9 +119,9 @@ const generateFilterHtml = () => {
   let html = '';
   for (let i = 1; i <= 5; i++) {
     html += `
-    <option value="${i}" ${
-      currentRating === i ? 'selected' : ''
-    }>${i} Stars</option>
+    <option value="${i}" ${currentRating === i ? 'selected' : ''}>${'★'.repeat(
+      i
+    )}</option>
    `;
   }
   return html;
@@ -132,7 +132,7 @@ const generateStartHtml = () => {
   <h1>My Bookmarks</h1>
       <button class="new-button js-new-button">New</button>
       <form class="filter-menu js-filter-menu">
-        <label for="filter-rating">Minimum rating</label>
+        <label for="filter-rating">Minimum rating: </label>
         <select id="filter-rating">
           ${generateFilterHtml()}
         </select>
@@ -161,7 +161,9 @@ const generateStartHtml = () => {
               aria-expanded="false"
             >
               <span class="bm-title js-bm-title">${bm.title}</span>
-              <span class="bm-rating js-bm-rating">${bm.rating}</span>
+              <span class="bm-rating js-bm-rating">${'★'.repeat(
+                bm.rating
+              )}</span>
             </button>
           </li>
         `;
@@ -205,7 +207,7 @@ const generateRatingHtml = currentRating => {
     html += `
     <option value="${i}" ${
       Number(currentRating) === i ? 'selected' : ''
-    }>${i} Stars</option>
+    }>${'★'.repeat(i)}</option>
    `;
   }
   return html;

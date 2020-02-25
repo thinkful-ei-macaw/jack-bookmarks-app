@@ -8,11 +8,13 @@
 
 button {
   display: inline-block;
-  border: 1px solid plum;
+  border: 1px solid #0a8754;
+  border-radius: 5px;
   padding: 1rem 2rem;
   margin: 0;
   text-decoration: none;
-  background: #0069ed;
+  background: #00416a;
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
   color: #ffffff;
   font-family: sans-serif;
   font-size: 1rem;
@@ -47,17 +49,31 @@ html {
 body {
   height: inherit;
   font-family: 'Open Sans';
+  background: #00416a; /* fallback for old browsers */
+  background: #00416a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #e4e5e6,
+    #00416a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #e4e5e6,
+    #00416a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 h1,
-h2,
-h3 {
+h2 {
   font-family: 'Roboto';
 }
 
 h1 {
   grid-area: header;
   justify-self: center;
+  color: #142720;
+  font-size: 3em;
+  text-shadow: 1px 1px 1px rgb(126, 123, 123);
 }
 
 ul {
@@ -72,8 +88,20 @@ ul {
   gap: 8px 8px;
   grid-template-areas:
     'header header header'
-    '. new filter'
+    'new filter filter'
     'bmark bmark bmark';
+}
+
+#filter-rating {
+  height: 50px;
+  width: fit-content;
+  font-size: 1.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+}
+
+.filter-rating-div {
+  display: contents;
 }
 
 .new-item-form,
@@ -83,6 +111,24 @@ ul {
   grid-row: 3 / 5;
   margin-left: auto;
   margin-right: auto;
+}
+
+.new-item-form,
+.expanded-content,
+.update-item-form {
+  opacity: 0;
+  animation: fadeIn 1s 1 forwards;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .back-button {
@@ -121,17 +167,32 @@ ul {
   margin-right: auto;
 }
 
+.bm-rating {
+  display: inline-block;
+  font-size: 1.5em;
+}
+
 .bm-title {
+  display: inline-block;
   margin-right: 8px;
 }
 
 .expanded-content {
-  margin-left: auto;
-  margin-right: auto;
+  border: 2px solid #91aec1;
+  border-radius: 5px;
+  padding: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.expanded-content-rating {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
 }
 
 .delete-bm {
-  background-color: red;
+  background-color: rgb(102, 16, 16);
 }
 
 .bm-expand {
@@ -141,4 +202,12 @@ ul {
 footer {
   position: absolute;
   bottom: 0;
+}
+
+@media screen and (min-width: 1000px) {
+  #root {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
