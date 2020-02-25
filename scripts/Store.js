@@ -21,8 +21,8 @@ const findById = function(id) {
 };
 
 const deleteBookmark = function(id) {
-  const currentBookmark = findById(id);
-  const index = bookmarks.indexOf(currentBookmark);
+  const currentBookmark = this.findById(id);
+  const index = this.bookmarks.indexOf(currentBookmark);
   this.bookmarks.splice(index, 1);
 };
 
