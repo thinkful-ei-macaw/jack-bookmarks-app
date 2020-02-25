@@ -205,6 +205,13 @@ label:hover {
   margin-right: 1em;
 }
 
+.expanded-content p {
+  border: 2px solid #76a7c7;
+  border-radius: 5px;
+  padding: 1em;
+  box-shadow: 0 4px 3px -3px #304452;
+}
+
 a.anchor-visit {
   display: inline-block;
   text-decoration: none;
@@ -280,6 +287,24 @@ a.anchor-visit:active {
   width: 100px;
 }
 
+.error-alert {
+  position: fixed;
+  z-index: 1;
+  opacity: 0.95;
+  height: 100px;
+  width: 320px;
+  top: 20%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -160px;
+  padding: 1em;
+  color: white;
+  background-color: #5f0f23;
+  border: 2px solid #0b3653;
+  border-radius: 5px;
+  box-shadow: 0 4px 3px -3px #304452;
+}
+
 footer {
   position: absolute;
   bottom: 0;
@@ -290,5 +315,9 @@ footer {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .expanded-content {
+    padding: 2em;
   }
 }

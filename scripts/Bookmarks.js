@@ -114,6 +114,13 @@ const clickUpdateBookmark = id => {
   });
 };
 
+const clickCloseError = () => {
+  $('#alert-container').on('click', '.js-error-close', () => {
+    console.log('clicked close');
+    renderError(null);
+  });
+};
+
 const generateFilterHtml = () => {
   let currentRating = Store.getFilterRating();
   let html = '';
@@ -158,7 +165,6 @@ const generateStartHtml = () => {
             <button
               class="bm-expand js-bm-expand"
               role="button"
-              aria-expanded="false"
             >
               <span class="bm-title js-bm-title">${bm.title}</span>
               <span class="bm-rating js-bm-rating">${'★'.repeat(
@@ -247,11 +253,16 @@ const generateEditViewHtml = bookmark => {
 };
 
 const generateErrorHtml = error => {
-  return `
+  if (error === null) {
+    return '';
+  } else {
+    return `
   <div role="alert" class="error-alert">
     <p>Oops! An error occured: ${error.message}</p>
+    <button class="error-close js-error-close">Close Error</button>
   </div>
   `;
+  }
 };
 
 const render = (target, component) => {
@@ -268,7 +279,8 @@ const renderEditView = bookmark => {
 };
 
 const renderError = error => {
-  $('#root').prepend(generateErrorHtml(error));
+  $('#alert-container').html(generateErrorHtml(error));
+  clickCloseError();
 };
 
 const setupEventListners = () => {

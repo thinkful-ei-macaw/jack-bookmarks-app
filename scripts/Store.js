@@ -3,7 +3,6 @@ import { getBookmarks as queryBookmarks } from './QueryUtils.js';
 const bookmarks = [];
 let filterRating;
 let error = null;
-let currentlyAdding = false;
 
 const addBookmark = function(bookmark) {
   bookmark.showDetails = false;
@@ -59,7 +58,6 @@ export default {
   setFilterRating,
   getFilterRating,
   setError,
-  currentlyAdding,
   toggleShowDetails,
   resetShowDetails,
   bookmarks,
