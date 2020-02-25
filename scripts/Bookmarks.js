@@ -1,10 +1,9 @@
-'use strict';
 import Store from './Store.js';
 import QueryUtils from './QueryUtils.js';
 
 const clickNewBookmark = () => {
   //Click handler for new bm
-  $('#root').on('click', '.js-new-button', event => {
+  $('#root').on('click', '.js-new-button', () => {
     render('#root', generateNewBookmarkHtml());
     clickCancelBookmark();
     clickCreateBookmark();
@@ -13,9 +12,9 @@ const clickNewBookmark = () => {
 
 const clickFilterBookmark = () => {
   //Click handler for bm filter
-  $('#root').on('change', '#filter-rating', event => {
-    console.log($('#filter-rating').val());
-    Store.filterRating = $('#filter-rating').val();
+  $('#root').on('change', '#filter-rating', () => {
+    let newRating = Number($('#filter-rating').val());
+    Store.setFilterRating(newRating);
     renderHome();
   });
 };
@@ -29,7 +28,7 @@ const getBookmarkIdFromElement = item => {
 const clickExpandBookmark = () => {
   //Click handler for expand bm details
   $('#root').on('click', '.js-bm-expand', event => {
-    Store.bookmarks.map(e => (e.showDetails = false));
+    Store.resetShowDetails();
     const id = getBookmarkIdFromElement(event.currentTarget);
     Store.toggleShowDetails(id);
     renderHome();
@@ -62,7 +61,8 @@ const clickDeleteBookmark = () => {
 
 const clickCancelBookmark = () => {
   //Click handler for cancel creation of a new bookmark
-  $('#root').on('click', '.js-back-button', event => {
+  $('#root').on('click', '.js-back-button', () => {
+    Store.resetShowDetails();
     renderHome();
   });
 };
@@ -83,8 +83,22 @@ const clickCreateBookmark = () => {
     const newBookmark = createBookmarkObject(formData);
     QueryUtils.newBookmark(newBookmark)
       .then(newBookmark => Store.addBookmark(newBookmark))
+      .then(() => Store.resetShowDetails())
       .then(() => renderHome());
   });
+};
+
+const generateFilterHtml = () => {
+  let currentRating = Store.getFilterRating();
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    html += `
+    <option value="${i}" ${
+      currentRating === i ? 'selected' : ''
+    }>${i} Stars</option>
+   `;
+  }
+  return html;
 };
 
 const generateStartHtml = () => {
@@ -94,18 +108,12 @@ const generateStartHtml = () => {
       <form class="filter-menu js-filter-menu">
         <label for="filter-rating">Minimum rating</label>
         <select id="filter-rating">
-          <option>None</option>
-          <option value="1">1 star</option>
-          <option value="2">2 star</option>
-          <option value="3">3 star</option>
-          <option value="4">4 star</option>
-          <option value="5">5 star</option>
+          ${generateFilterHtml()}
         </select>
       </form>
       <ul class="bookmark-list js-bookmark-list">`;
-
   Store.bookmarks.forEach(bm => {
-    if (bm.rating >= Store.filterRating) {
+    if (bm.rating >= Store.getFilterRating()) {
       if (bm.showDetails && bm.rating) {
         html += `
           <li data-item-id="${bm.id}" class="bookmark-item js-bookmark-item">
@@ -135,6 +143,7 @@ const generateStartHtml = () => {
     }
   });
   html += '</ul>';
+  console.log(Store.getFilterRating());
   return html;
 };
 
@@ -189,6 +198,7 @@ const populateStore = () => {
 
 const main = () => {
   populateStore();
+  Store.setFilterRating(1);
   setupEventListners();
 };
 

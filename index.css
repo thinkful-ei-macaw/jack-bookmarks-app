@@ -80,6 +80,12 @@ ul {
   /* New item form will take up all explicit space except header */
   grid-column: 1 / 4;
   grid-row: 3 / 5;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-button {
+  grid-column: 2 / 3;
 }
 
 .new-button {

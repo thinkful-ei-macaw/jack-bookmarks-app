@@ -3,32 +3,49 @@ let filterRating = 1;
 let error = null;
 let currentlyAdding = false;
 
-const findById = id => bookmarks.find(e => e.id === id);
+const findById = function(id) {
+  return this.bookmarks.find(e => e.id === id);
+};
 
-const addBookmark = bookmark => {
+const addBookmark = function(bookmark) {
   console.log(bookmark);
   bookmark.showDetails = false;
-  bookmarks.push(bookmark);
+  this.bookmarks.push(bookmark);
 };
 
-const deleteBookmark = id => {
+const deleteBookmark = function(id) {
   const currentBookmark = findById(id);
   const index = bookmarks.indexOf(currentBookmark);
-  bookmarks.splice(index, 1);
+  this.bookmarks.splice(index, 1);
 };
 
-const toggleShowDetails = id => {
-  const currentBookmark = findById(id);
+const toggleShowDetails = function(id) {
+  const currentBookmark = this.findById(id);
   currentBookmark.showDetails = !currentBookmark.showDetails;
+};
+
+const resetShowDetails = function() {
+  this.bookmarks.map(e => (e.showDetails = false));
+};
+
+const setFilterRating = function(rating) {
+  this.filterRating = rating;
+  console.log('New rating is: ' + rating);
+};
+
+const getFilterRating = function() {
+  return this.filterRating;
 };
 
 export default {
   addBookmark,
   deleteBookmark,
-  filterRating,
+  setFilterRating,
+  getFilterRating,
   error,
   currentlyAdding,
   toggleShowDetails,
+  resetShowDetails,
   bookmarks,
   findById
 };
