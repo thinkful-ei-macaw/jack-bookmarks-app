@@ -220,6 +220,7 @@ const generateEditViewHtml = bookmark => {
       <h1>My Bookmarks</h1>
       <button class="back-button js-back-button">Cancel</button>
       <form id="update-item-form" class="update-item-form js-update-item-form">
+      <h2>Update bookmark below:</h2>
       <div>
         <label for="title">Name:</label>
         <input type="text" id="title" name="title" value=${
