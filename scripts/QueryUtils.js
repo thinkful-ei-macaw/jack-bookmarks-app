@@ -35,11 +35,11 @@ const newBookmark = bookmarkFormData => {
   });
 };
 
+//Short circuiting
 const updateBookmark = (id, updates) => {
   //Optional: implement updating data
-  console.log(JSON.stringify(updates));
   return request(`${BASE_URL}${id}`, {
-    method: 'patch',
+    method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updates)
   });
