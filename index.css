@@ -76,7 +76,8 @@ ul {
     'bmark bmark bmark';
 }
 
-.new-item-form {
+.new-item-form,
+.update-item-form {
   /* New item form will take up all explicit space except header */
   grid-column: 1 / 4;
   grid-row: 3 / 5;

@@ -23,7 +23,7 @@ const request = (...args) => {
     });
 };
 
-const getBookmarks = () => {
+export const getBookmarks = () => {
   return request(BASE_URL);
 };
 
@@ -37,7 +37,8 @@ const newBookmark = bookmarkFormData => {
 
 const updateBookmark = (id, updates) => {
   //Optional: implement updating data
-  return request(`${BASE_URL}/${id}`, {
+  console.log(JSON.stringify(updates));
+  return request(`${BASE_URL}${id}`, {
     method: 'patch',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updates)

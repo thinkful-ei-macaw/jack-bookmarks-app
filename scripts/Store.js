@@ -1,16 +1,23 @@
+import { getBookmarks as queryBookmarks } from './QueryUtils.js';
+
 const bookmarks = [];
-let filterRating = 1;
+let filterRating;
 let error = null;
 let currentlyAdding = false;
 
-const findById = function(id) {
-  return this.bookmarks.find(e => e.id === id);
-};
-
 const addBookmark = function(bookmark) {
-  console.log(bookmark);
   bookmark.showDetails = false;
   this.bookmarks.push(bookmark);
+};
+
+const populateStore = function() {
+  return queryBookmarks().then(bookmarks => {
+    bookmarks.forEach(bm => this.addBookmark(bm));
+  });
+};
+
+const findById = function(id) {
+  return this.bookmarks.find(e => e.id === id);
 };
 
 const deleteBookmark = function(id) {
@@ -30,7 +37,6 @@ const resetShowDetails = function() {
 
 const setFilterRating = function(rating) {
   this.filterRating = rating;
-  console.log('New rating is: ' + rating);
 };
 
 const getFilterRating = function() {
@@ -47,5 +53,6 @@ export default {
   toggleShowDetails,
   resetShowDetails,
   bookmarks,
-  findById
+  findById,
+  populateStore
 };

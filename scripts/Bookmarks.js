@@ -34,6 +34,7 @@ const clickExpandBookmark = () => {
     renderHome();
     clickCloseBookmark();
     clickDeleteBookmark();
+    clickEditBookmark();
   });
 };
 
@@ -88,6 +89,28 @@ const clickCreateBookmark = () => {
   });
 };
 
+const clickEditBookmark = () => {
+  $('#root').on('click', '.js-edit-bm', event => {
+    console.log('event fired');
+    // event.stopPropagation();
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    const bookmark = Store.findById(id);
+    renderEditView(bookmark);
+    clickCancelBookmark();
+    clickUpdateBookmark(id);
+  });
+};
+
+const clickUpdateBookmark = id => {
+  $('form.js-update-item-form').submit(event => {
+    event.preventDefault();
+    let form = document.getElementById('update-item-form');
+    let formData = new FormData(form);
+    const newBookmark = createBookmarkObject(formData);
+    QueryUtils.updateBookmark(id, newBookmark);
+  });
+};
+
 const generateFilterHtml = () => {
   let currentRating = Store.getFilterRating();
   let html = '';
@@ -121,7 +144,7 @@ const generateStartHtml = () => {
               <h2 id="bm-title js-bm-title">${bm.title}</h2>
               <a href="${bm.url}">Visit Site</a>
               <p>${bm.desc}</p>
-              <button clas="js-edit-bm edit-bm">Edit</button>
+              <button class="js-edit-bm edit-bm">Edit</button>
               <button class="js-close-bm close-bm">Close</button>
               <button class="js-delete-bm delete-bm">Delete</button>
             </div>
@@ -143,7 +166,6 @@ const generateStartHtml = () => {
     }
   });
   html += '</ul>';
-  console.log(Store.getFilterRating());
   return html;
 };
 
@@ -174,6 +196,33 @@ const generateNewBookmarkHtml = () => {
   `;
 };
 
+const generateEditViewHtml = bookmark => {
+  return `
+      <h1>My Bookmarks</h1>
+      <button class="back-button js-back-button">Cancel</button>
+      <form id="update-item-form" class="update-item-form js-update-item-form">
+        <label for="title">Name:</label>
+        <input type="text" id="title" name="title" value=${bookmark.title} required/>
+        <br />
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" value=${bookmark.url} required/>
+        <br />
+        <label for="desc">Description:</label>
+        <input type="text" id="desc" name="desc" value="${bookmark.desc}" />
+        <label for="rating">Rating:</label>
+        <select id="rating" name="rating" value="${bookmark.rating}">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <br />
+        <button class="js-edit-bookmark" type="submit">Update Bookmark</button>
+      </form>
+  `;
+};
+
 const render = (target, component) => {
   //Simple flexible render
   $(target).html(component);
@@ -183,23 +232,21 @@ const renderHome = () => {
   render('#root', generateStartHtml());
 };
 
+const renderEditView = bookmark => {
+  render('#root', generateEditViewHtml(bookmark));
+};
+
 const setupEventListners = () => {
   clickNewBookmark();
   clickFilterBookmark();
   clickExpandBookmark();
 };
 
-const populateStore = () => {
-  QueryUtils.getBookmarks().then(bookmarks => {
-    bookmarks.forEach(bm => Store.addBookmark(bm));
-    renderHome();
-  });
-};
-
 const main = () => {
-  populateStore();
+  Store.populateStore()
+    .then(() => renderHome())
+    .then(() => setupEventListners());
   Store.setFilterRating(1);
-  setupEventListners();
 };
 
 $(main);
