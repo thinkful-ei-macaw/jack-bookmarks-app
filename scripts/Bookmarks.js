@@ -145,7 +145,7 @@ const generateStartHtml = () => {
           <li data-item-id="${bm.id}" class="bookmark-item js-bookmark-item">
             <div class="expanded-content js-expanded-content">
               <h2 id="bm-title js-bm-title">${bm.title}</h2>
-              <a href="${bm.url}">Visit Site</a>
+              <a class="anchor-visit" href="${bm.url}">Visit Site</a>
               <p>${bm.desc}</p>
               <button class="js-edit-bm edit-bm">Edit</button>
               <button class="js-close-bm close-bm">Close</button>

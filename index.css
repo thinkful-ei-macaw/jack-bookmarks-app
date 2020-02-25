@@ -86,9 +86,18 @@ h1 {
   text-shadow: 1px 1px 1px rgb(126, 123, 123);
 }
 
+h2 {
+  font-size: 2em;
+  text-shadow: 1px 1px 1px rgba(126, 123, 123, 0.274);
+}
+
 ul {
   padding: 0;
   margin: 0;
+}
+
+label:hover {
+  cursor: pointer;
 }
 
 #root {
@@ -178,12 +187,14 @@ ul {
 
 .bm-rating {
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 2em;
+  float: right;
 }
 
 .bm-title {
   display: inline-block;
-  margin-right: 8px;
+  float: left;
+  font-size: 2em;
 }
 
 .expanded-content {
@@ -192,6 +203,26 @@ ul {
   padding: 0.5em;
   margin-left: 1em;
   margin-right: 1em;
+}
+
+a.anchor-visit {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: #0a8754;
+  padding: 1em 1.5em;
+  box-shadow: 0 2px 0 #043a24;
+  transition: background-color 1s ease-in-out;
+}
+
+a.anchor-visit:hover {
+  cursor: pointer;
+  background-color: #0da568;
+}
+
+a.anchor-visit:active {
+  box-shadow: none;
+  background-color: #0da568;
 }
 
 .expanded-content-rating {
