@@ -183,7 +183,6 @@ const generateStartHtml = () => {
 const generateNewBookmarkHtml = () => {
   return `
   <h1>My Bookmarks</h1>
-      <button class="back-button js-back-button">Back</button>
       <form id="new-item-form" class="new-item-form js-new-item-form">
       <h2>Create a New Bookmark!</h2>
       <div>
@@ -205,6 +204,7 @@ const generateNewBookmarkHtml = () => {
         </select>
         </div>
         <button class="new-item-submit-button" type="submit">Create!</button>
+        <button class="back-button-new-bm js-back-button">Cancel</button>
       </form>
   `;
 };
@@ -224,7 +224,6 @@ const generateRatingHtml = currentRating => {
 const generateEditViewHtml = bookmark => {
   return `
       <h1>My Bookmarks</h1>
-      <button class="back-button js-back-button">Cancel</button>
       <form id="update-item-form" class="update-item-form js-update-item-form">
       <h2>Update bookmark below:</h2>
       <div>
@@ -248,6 +247,7 @@ const generateEditViewHtml = bookmark => {
         </select>
         </div>
         <button class="js-edit-bookmark update-item-submit-button" type="submit">Update Bookmark</button>
+        <button class="back-button js-back-button">Cancel</button>
       </form>
   `;
 };
