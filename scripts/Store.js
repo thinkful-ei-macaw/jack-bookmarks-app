@@ -29,5 +29,6 @@ export default {
   error,
   currentlyAdding,
   toggleShowDetails,
-  bookmarks
+  bookmarks,
+  findById
 };

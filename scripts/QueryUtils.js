@@ -27,17 +27,11 @@ const getBookmarks = () => {
   return request(BASE_URL);
 };
 
-const serializeJson = formData => {
-  const formObj = {};
-  formData.forEach((val, name) => (formObj[name] = val));
-  return JSON.stringify(formObj);
-};
-
 const newBookmark = bookmarkFormData => {
   return request(BASE_URL, {
     method: 'post',
     headers: { 'Content-Type': ' application/json' },
-    body: serializeJson(bookmarkFormData)
+    body: JSON.stringify(bookmarkFormData)
   });
 };
 

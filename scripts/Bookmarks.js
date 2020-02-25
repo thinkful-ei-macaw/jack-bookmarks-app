@@ -18,15 +18,31 @@ const clickFilterBookmark = () => {
   });
 };
 
+const getBookmarkIdFromElement = item => {
+  return $(item)
+    .closest('.js-bookmark-item')
+    .data('item-id');
+};
+
 const clickExpandBookmark = () => {
   //Click handler for expand bm details
   $('#root').on('click', '.js-bm-expand', event => {
-    console.log('Expand details');
+    Store.bookmarks.map(e => (e.showDetails = false));
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    Store.toggleShowDetails(id);
+    renderHome();
+    clickCloseBookmark();
   });
 };
 
 const clickCloseBookmark = () => {
   //Go back / close bm details
+  $('#root').on('click', '.js-close-bm', event => {
+    event.stopPropagation();
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    Store.toggleShowDetails(id);
+    renderHome();
+  });
 };
 
 const clickDeleteBookmark = () => {
@@ -40,6 +56,12 @@ const clickCancelBookmark = () => {
   });
 };
 
+const createBookmarkObject = formData => {
+  const formObj = {};
+  formData.forEach((val, name) => (formObj[name] = val));
+  return formObj;
+};
+
 const clickCreateBookmark = () => {
   //Click handler for confirm create new bookmark
   //Must check all required details are provided
@@ -47,7 +69,10 @@ const clickCreateBookmark = () => {
     event.preventDefault();
     let form = document.getElementById('new-item-form');
     let formData = new FormData(form);
-    QueryUtils.newBookmark(formData).then(() => populateStore());
+    const newBookmark = createBookmarkObject(formData);
+    QueryUtils.newBookmark(newBookmark)
+      .then(newBookmark => Store.addBookmark(newBookmark))
+      .then(() => renderHome());
   });
 };
 
@@ -67,9 +92,25 @@ const generateStartHtml = () => {
         </select>
       </form>
       <ul class="bookmark-list js-bookmark-list">`;
+
   Store.bookmarks.forEach(bm => {
-    html += `
-        <li class="bookmark-item js-bookmark-item">
+    if (bm.showDetails) {
+      html += `
+  <li data-item-id="${bm.id}"class="bookmark-item js-bookmark-item">
+  <div class="expanded-content js-expanded-content">
+    <h2 id="bm-title js-bm-title">${bm.title}</h2>
+    <a href="${bm.url}">Visit Site</a>
+    <button>Edit</button>
+  <p>
+    ${bm.desc}
+  </p>
+  <button class="js-close-bm">Close</button><button class="js-delete-bm">Delete</button>
+</div>
+</li>
+`;
+    } else {
+      html += `
+        <li data-item-id="${bm.id}"class="bookmark-item js-bookmark-item">
           <button
             class="bm-expand js-bm-expand"
             role="button"
@@ -80,6 +121,7 @@ const generateStartHtml = () => {
           </button>
         </li>
         `;
+    }
   });
   html += '</ul>';
   return html;
@@ -109,6 +151,21 @@ const generateNewBookmarkHtml = () => {
         <br />
         <button type="submit">Create!</button>
       </form>
+  `;
+};
+
+const generateBookmarkDetailsHtml = () => {
+  return `
+  <div class="expanded-content js-expanded-content">
+    <h3 id="bm-title js-bm-title">Bookmark Title</h3>
+    <button>Visit Site</button>
+    <button>Edit</button>
+  <p>
+    Description: Lorem ipsum dolor sit, amet consectetur adipisicing
+    elit. Error, quam.
+  </p>
+  <button>Close</button><button>Delete</button>
+</div>
   `;
 };
 
