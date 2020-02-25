@@ -107,7 +107,9 @@ const clickUpdateBookmark = id => {
     let form = document.getElementById('update-item-form');
     let formData = new FormData(form);
     const newBookmark = createBookmarkObject(formData);
-    QueryUtils.updateBookmark(id, newBookmark);
+    QueryUtils.updateBookmark(id, newBookmark)
+      .then(() => Store.updateBookmark(id, newBookmark))
+      .then(() => renderHome());
   });
 };
 

@@ -29,15 +29,13 @@ export const getBookmarks = () => {
 
 const newBookmark = bookmarkFormData => {
   return request(BASE_URL, {
-    method: 'post',
+    method: 'POST',
     headers: { 'Content-Type': ' application/json' },
     body: JSON.stringify(bookmarkFormData)
   });
 };
 
-//Short circuiting
 const updateBookmark = (id, updates) => {
-  //Optional: implement updating data
   return request(`${BASE_URL}${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },

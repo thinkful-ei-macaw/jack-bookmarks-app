@@ -43,6 +43,12 @@ const getFilterRating = function() {
   return this.filterRating;
 };
 
+const updateBookmark = function(id, data) {
+  console.log(data);
+  const currentBookmark = this.findById(id);
+  Object.assign(currentBookmark, data);
+};
+
 export default {
   addBookmark,
   deleteBookmark,
@@ -54,5 +60,6 @@ export default {
   resetShowDetails,
   bookmarks,
   findById,
-  populateStore
+  populateStore,
+  updateBookmark
 };
