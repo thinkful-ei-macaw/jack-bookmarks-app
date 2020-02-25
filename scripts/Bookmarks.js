@@ -91,8 +91,6 @@ const clickCreateBookmark = () => {
 
 const clickEditBookmark = () => {
   $('#root').on('click', '.js-edit-bm', event => {
-    console.log('event fired');
-    // event.stopPropagation();
     const id = getBookmarkIdFromElement(event.currentTarget);
     const bookmark = Store.findById(id);
     renderEditView(bookmark);
@@ -198,13 +196,27 @@ const generateNewBookmarkHtml = () => {
   `;
 };
 
+const generateRatingHtml = currentRating => {
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    html += `
+    <option value="${i}" ${
+      Number(currentRating) === i ? 'selected' : ''
+    }>${i} Stars</option>
+   `;
+  }
+  return html;
+};
+
 const generateEditViewHtml = bookmark => {
   return `
       <h1>My Bookmarks</h1>
       <button class="back-button js-back-button">Cancel</button>
       <form id="update-item-form" class="update-item-form js-update-item-form">
         <label for="title">Name:</label>
-        <input type="text" id="title" name="title" value=${bookmark.title} required/>
+        <input type="text" id="title" name="title" value=${
+          bookmark.title
+        } required/>
         <br />
         <label for="url">URL:</label>
         <input type="url" id="url" name="url" value=${bookmark.url} required/>
@@ -212,12 +224,8 @@ const generateEditViewHtml = bookmark => {
         <label for="desc">Description:</label>
         <input type="text" id="desc" name="desc" value="${bookmark.desc}" />
         <label for="rating">Rating:</label>
-        <select id="rating" name="rating" value="${bookmark.rating}">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select id="rating" name="rating">
+          ${generateRatingHtml(bookmark.rating)}
         </select>
         <br />
         <button class="js-edit-bookmark" type="submit">Update Bookmark</button>
