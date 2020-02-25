@@ -49,6 +49,16 @@ html {
 body {
   height: inherit;
   font-family: 'Open Sans';
+}
+
+body:after {
+  content: '';
+  position: fixed; /* stretch a fixed position to the whole screen */
+  top: 0;
+  height: 100vh; /* fix for mobile browser address bar appearing disappearing */
+  left: 0;
+  right: 0;
+  z-index: -1; /* needed to keep in the background */
   background: #00416a; /* fallback for old browsers */
   background: #00416a; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -82,6 +92,7 @@ ul {
 }
 
 #root {
+  padding-bottom: 3em; /*Helps with margin-collapse on mobile safari */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -109,8 +120,6 @@ ul {
   /* New item form will take up all explicit space except header */
   grid-column: 1 / 4;
   grid-row: 3 / 5;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .new-item-form,
@@ -197,6 +206,47 @@ ul {
 
 .bm-expand {
   width: 80%;
+}
+
+.new-item-form,
+.update-item-form {
+  padding: 1em 3em;
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 2px solid #91aec1;
+}
+
+.new-item-form > div,
+.update-item-form > div {
+  margin-bottom: 1em;
+}
+
+.new-item-form label,
+.update-item-form label {
+  float: left;
+  text-align: left;
+  width: 100%;
+  font-size: 1.2em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.new-item-form input,
+.update-item-form input {
+  height: 2.5em;
+  width: 80%;
+  padding: 0.5em;
+}
+
+.new-item-submit-button,
+.update-item-submit-button {
+  position: relative;
+  top: 40px;
+  left: -20px;
+}
+
+#rating {
+  width: 100px;
 }
 
 footer {

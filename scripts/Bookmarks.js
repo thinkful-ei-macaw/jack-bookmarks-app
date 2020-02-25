@@ -179,24 +179,26 @@ const generateNewBookmarkHtml = () => {
   <h1>My Bookmarks</h1>
       <button class="back-button js-back-button">Back</button>
       <form id="new-item-form" class="new-item-form js-new-item-form">
+      <h2>Create a New Bookmark!</h2>
+      <div>
         <label for="title">Name:</label>
         <input type="text" id="title" name="title" required/>
-        <br />
+        </div>
+        <div>
         <label for="url">URL:</label>
         <input type="url" id="url" name="url" required/>
-        <br />
+        </div>
+        <div>
         <label for="desc">Description:</label>
         <input type="text" id="desc" name="desc" />
+        </div>
+        <div>
         <label for="rating">Rating:</label>
         <select id="rating" name="rating">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          ${generateRatingHtml(1)}
         </select>
-        <br />
-        <button type="submit">Create!</button>
+        </div>
+        <button class="new-item-submit-button" type="submit">Create!</button>
       </form>
   `;
 };
@@ -218,22 +220,27 @@ const generateEditViewHtml = bookmark => {
       <h1>My Bookmarks</h1>
       <button class="back-button js-back-button">Cancel</button>
       <form id="update-item-form" class="update-item-form js-update-item-form">
+      <div>
         <label for="title">Name:</label>
         <input type="text" id="title" name="title" value=${
           bookmark.title
         } required/>
-        <br />
+        </div>
+        <div>
         <label for="url">URL:</label>
         <input type="url" id="url" name="url" value=${bookmark.url} required/>
-        <br />
+        </div>
+        <div>
         <label for="desc">Description:</label>
         <input type="text" id="desc" name="desc" value="${bookmark.desc}" />
+        </div>
+        <div>
         <label for="rating">Rating:</label>
         <select id="rating" name="rating">
           ${generateRatingHtml(bookmark.rating)}
         </select>
-        <br />
-        <button class="js-edit-bookmark" type="submit">Update Bookmark</button>
+        </div>
+        <button class="js-edit-bookmark update-item-submit-button" type="submit">Update Bookmark</button>
       </form>
   `;
 };
