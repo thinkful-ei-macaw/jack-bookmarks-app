@@ -32,6 +32,7 @@ const clickExpandBookmark = () => {
     Store.toggleShowDetails(id);
     renderHome();
     clickCloseBookmark();
+    clickDeleteBookmark();
   });
 };
 
@@ -42,11 +43,19 @@ const clickCloseBookmark = () => {
     const id = getBookmarkIdFromElement(event.currentTarget);
     Store.toggleShowDetails(id);
     renderHome();
+    clickCloseBookmark();
   });
 };
 
 const clickDeleteBookmark = () => {
   //Click handler for delete bookmark in details view
+  $('#root').on('click', '.js-delete-bm', event => {
+    event.stopPropagation();
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    QueryUtils.deleteBookmark(id)
+      .then(() => Store.deleteBookmark(id))
+      .then(() => renderHome());
+  });
 };
 
 const clickCancelBookmark = () => {
