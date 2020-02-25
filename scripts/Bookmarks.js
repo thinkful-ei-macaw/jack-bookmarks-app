@@ -15,6 +15,8 @@ const clickFilterBookmark = () => {
   //Click handler for bm filter
   $('#root').on('change', '#filter-rating', event => {
     console.log($('#filter-rating').val());
+    Store.filterRating = $('#filter-rating').val();
+    renderHome();
   });
 };
 
@@ -93,43 +95,43 @@ const generateStartHtml = () => {
         <label for="filter-rating">Minimum rating</label>
         <select id="filter-rating">
           <option>None</option>
-          <option>1 star</option>
-          <option>2 star</option>
-          <option>3 star</option>
-          <option>4 star</option>
-          <option>5 star</option>
+          <option value="1">1 star</option>
+          <option value="2">2 star</option>
+          <option value="3">3 star</option>
+          <option value="4">4 star</option>
+          <option value="5">5 star</option>
         </select>
       </form>
       <ul class="bookmark-list js-bookmark-list">`;
 
   Store.bookmarks.forEach(bm => {
-    if (bm.showDetails) {
-      html += `
-  <li data-item-id="${bm.id}"class="bookmark-item js-bookmark-item">
-  <div class="expanded-content js-expanded-content">
-    <h2 id="bm-title js-bm-title">${bm.title}</h2>
-    <a href="${bm.url}">Visit Site</a>
-    <button>Edit</button>
-  <p>
-    ${bm.desc}
-  </p>
-  <button class="js-close-bm">Close</button><button class="js-delete-bm">Delete</button>
-</div>
-</li>
-`;
-    } else {
-      html += `
-        <li data-item-id="${bm.id}"class="bookmark-item js-bookmark-item">
-          <button
-            class="bm-expand js-bm-expand"
-            role="button"
-            aria-expanded="false"
-          >
-            <span class="bm-title js-bm-title">${bm.title}</span
-            ><span class="bm-rating js-bm-rating">${bm.rating}</span>
-          </button>
-        </li>
+    if (bm.rating >= Store.filterRating) {
+      if (bm.showDetails && bm.rating) {
+        html += `
+          <li data-item-id="${bm.id}" class="bookmark-item js-bookmark-item">
+            <div class="expanded-content js-expanded-content">
+              <h2 id="bm-title js-bm-title">${bm.title}</h2>
+              <a href="${bm.url}">Visit Site</a>
+              <p>${bm.desc}</p>
+              <button clas="js-edit-bm edit-bm">Edit</button>
+              <button class="js-close-bm close-bm">Close</button>
+              <button class="js-delete-bm delete-bm">Delete</button>
+            </div>
+          </li>`;
+      } else {
+        html += `
+          <li data-item-id="${bm.id}" class="bookmark-item js-bookmark-item">
+            <button
+              class="bm-expand js-bm-expand"
+              role="button"
+              aria-expanded="false"
+            >
+              <span class="bm-title js-bm-title">${bm.title}</span>
+              <span class="bm-rating js-bm-rating">${bm.rating}</span>
+            </button>
+          </li>
         `;
+      }
     }
   });
   html += '</ul>';
@@ -160,21 +162,6 @@ const generateNewBookmarkHtml = () => {
         <br />
         <button type="submit">Create!</button>
       </form>
-  `;
-};
-
-const generateBookmarkDetailsHtml = () => {
-  return `
-  <div class="expanded-content js-expanded-content">
-    <h3 id="bm-title js-bm-title">Bookmark Title</h3>
-    <button>Visit Site</button>
-    <button>Edit</button>
-  <p>
-    Description: Lorem ipsum dolor sit, amet consectetur adipisicing
-    elit. Error, quam.
-  </p>
-  <button>Close</button><button>Delete</button>
-</div>
   `;
 };
 
