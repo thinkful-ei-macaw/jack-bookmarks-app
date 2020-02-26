@@ -243,6 +243,10 @@ a.anchor-visit:active {
   background-color: rgb(102, 16, 16);
 }
 
+.delete-bm:hover {
+  background-color: rgb(160, 26, 26);
+}
+
 .bm-expand {
   width: 80%;
 }

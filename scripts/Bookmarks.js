@@ -271,6 +271,7 @@ const renderEditView = bookmark => {
 
 const renderError = error => {
   $('#alert-container').html(generateErrorHtml(error));
+  $('.error-close').focus();
   clickCloseError();
 };
 
