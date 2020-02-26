@@ -23,7 +23,6 @@ button {
   -moz-appearance: none;
   /*Default sizing */
   height: 50px;
-  width: 100;
 }
 
 button:hover,
@@ -284,23 +283,30 @@ a.anchor-visit:active {
 
 .new-item-submit-button,
 .update-item-submit-button {
+  background-color: #0a8754;
+  border-color: #00416a;
   position: absolute;
   bottom: -25px;
   right: 20px;
 }
 
-.back-button {
+.new-item-submit-button:hover,
+.update-item-submit-button:hover {
+  background-color: #0d9961;
+}
+
+.back-button,
+.back-button-new-bm {
   position: absolute;
   background-color: #5f0f23;
+  border-color: #00416a;
   top: -25px;
   left: 20px;
 }
 
-.back-button-new-bm {
-  position: absolute;
-  background-color: #5f0f23;
-  top: -25px;
-  left: 20px;
+.back-button:hover,
+.back-button-new-bm:hover {
+  background-color: #881532;
 }
 
 #rating {
@@ -341,4 +347,31 @@ footer {
   .expanded-content {
     padding: 2em;
   }
+
+  h1 {
+    font-size: 3.3em;
+  }
+
+  h2 {
+    font-size: 2.2em;
+  }
+
+  button {
+    font-size: 1.1em;
+    height: 55px;
+  }
+
+  input, select, p {
+    font-size: 1.2em;
+  }
+
+  .bm-rating, .bm-title {
+    font-size: 2.2em;
+  }
+
+  .new-item-form label,
+  .update-item-form label {
+    font-size: 1.32em;
+  }
+
 }
