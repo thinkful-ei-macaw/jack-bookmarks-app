@@ -75,7 +75,7 @@ body:after {
 
 h1,
 h2 {
-  font-family: 'Roboto';
+  font-family: 'Righteous';
 }
 
 h1 {
@@ -106,7 +106,7 @@ label:hover {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto 1fr;
-  gap: 8px 8px;
+  gap: 1em 0.5em;
 }
 
 #filter-rating {
@@ -203,6 +203,10 @@ label:hover {
   padding: 0.5em;
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.expanded-content h2 {
+  margin-top: 8px;
 }
 
 .expanded-content p {
@@ -314,6 +318,7 @@ a.anchor-visit:active {
   margin-left: -160px;
   padding: 1em;
   color: white;
+  font-weight: 600;
   background-color: #5f0f23;
   border: 2px solid #0b3653;
   border-radius: 5px;
