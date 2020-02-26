@@ -23,10 +23,6 @@ const request = (...args) => {
     });
 };
 
-export const getBookmarks = () => {
-  return request(BASE_URL);
-};
-
 const newBookmark = bookmarkFormData => {
   return request(BASE_URL, {
     method: 'POST',
@@ -47,9 +43,13 @@ const deleteBookmark = id => {
   return request(`${BASE_URL}/${id}`, { method: 'DELETE' });
 };
 
+export const getBookmarks = () => { 
+  return request(BASE_URL);
+};
+
 export default {
-  getBookmarks,
   newBookmark,
+  updateBookmark,
   deleteBookmark,
-  updateBookmark
+  getBookmarks
 };

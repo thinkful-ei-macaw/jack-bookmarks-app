@@ -2,7 +2,6 @@ import Store from './Store.js';
 import QueryUtils from './QueryUtils.js';
 
 const clickNewBookmark = () => {
-  //Click handler for new bm
   $('#root').on('click', '.js-new-button', () => {
     render('#root', generateNewBookmarkHtml());
     clickCancelBookmark();
@@ -11,7 +10,6 @@ const clickNewBookmark = () => {
 };
 
 const clickFilterBookmark = () => {
-  //Click handler for bm filter
   $('#root').on('change', '#filter-rating', () => {
     let newRating = Number($('#filter-rating').val());
     Store.setFilterRating(newRating);
@@ -26,7 +24,6 @@ const getBookmarkIdFromElement = item => {
 };
 
 const clickExpandBookmark = () => {
-  //Click handler for expand bm details
   $('#root').on('click', '.js-bm-expand', event => {
     Store.resetShowDetails();
     const id = getBookmarkIdFromElement(event.currentTarget);
@@ -39,7 +36,6 @@ const clickExpandBookmark = () => {
 };
 
 const clickCloseBookmark = () => {
-  //Go back / close bm details
   $('#root').on('click', '.js-close-bm', event => {
     event.stopPropagation();
     const id = getBookmarkIdFromElement(event.currentTarget);
@@ -50,7 +46,6 @@ const clickCloseBookmark = () => {
 };
 
 const clickDeleteBookmark = () => {
-  //Click handler for delete bookmark in details view
   $('#root').on('click', '.js-delete-bm', event => {
     event.stopPropagation();
     const id = getBookmarkIdFromElement(event.currentTarget);
@@ -62,7 +57,6 @@ const clickDeleteBookmark = () => {
 };
 
 const clickCancelBookmark = () => {
-  //Click handler for cancel creation of a new bookmark
   $('#root').on('click', '.js-back-button', () => {
     Store.resetShowDetails();
     renderHome();
@@ -76,8 +70,6 @@ const createBookmarkObject = formData => {
 };
 
 const clickCreateBookmark = () => {
-  //Click handler for confirm create new bookmark
-  //Must check all required details are provided
   $('form.js-new-item-form').submit(event => {
     event.preventDefault();
     let form = document.getElementById('new-item-form');
@@ -266,7 +258,6 @@ const generateErrorHtml = error => {
 };
 
 const render = (target, component) => {
-  //Simple flexible render
   $(target).html(component);
 };
 

@@ -4,8 +4,6 @@
   box-sizing: border-box;
 }
 
-/* Buttons are king */
-
 button {
   display: inline-block;
   border: 1px solid #0a8754;
@@ -123,7 +121,6 @@ label:hover {
 
 .new-item-form,
 .update-item-form {
-  /* New item form will take up all explicit space except header */
   grid-column: 1 / 4;
   grid-row: 2 / 5;
 }

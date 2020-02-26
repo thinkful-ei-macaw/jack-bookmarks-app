@@ -43,7 +43,6 @@ const getFilterRating = function() {
 };
 
 const updateBookmark = function(id, data) {
-  console.log(data);
   const currentBookmark = this.findById(id);
   Object.assign(currentBookmark, data);
 };
