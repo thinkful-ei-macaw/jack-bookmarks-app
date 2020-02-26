@@ -373,5 +373,13 @@ footer {
   .update-item-form label {
     font-size: 1.32em;
   }
+  
+  label[for="filter-rating"] {
+    font-size: 1.5em;
+  }
+
+  #filter-rating {
+    margin-left: 8px;
+  }
 
 }
