@@ -4,7 +4,7 @@ App for saving, describing and rating bookmarks.
 
 [Click here to see a Live version!](https://thinkful-ei-macaw.github.io/jack-bookmarks-app/)
 
-##User Stories Fulfilled
+## User Stories Fulfilled
 
 [x] I can add bookmarks to my bookmark list. Bookmarks contain:
 
